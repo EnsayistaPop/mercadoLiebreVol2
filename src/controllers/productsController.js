@@ -26,7 +26,22 @@ const controller = {
 	
 	// Create -  Method to store
 	store: (req, res) => {
-		res.redirect('/')
+
+		let newProduct = {
+		id: id = products.length + 1,
+		name:req.body.name,
+		price:JSON.parse(req.body.price) ,
+		discount:JSON.parse(req.body.discount),
+		category:req.body.category,
+		description:req.body.description
+		};
+	console.log(newProduct);
+	products.push(newProduct);
+	console.log('producto pusheado');
+	let productsJSON = JSON.stringify(products);
+	fs.writeFileSync(productsFilePath, productsJSON);
+	console.log('producto cargado al JSON :D')
+	res.redirect('/')
 	},
 
 	// Update - Form to edit

@@ -46,15 +46,35 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		res.render('product-edit-form')
+		let productId = req.params.id;
+		let product = products.find(product => product.id == productId);
+		res.render('product-edit-form', {product}) 
 	},
 	// Update - Method to update
 	update: (req, res) => {
+		let productId = req.params.id;
+		let productAedit = products.find(product => product.id == productId);
+		console.log(productAedit);
+		let productEdit = {
+			name: productAedit.name = req.body.name,
+			price: productAedit.price = req.body.price,
+			discount:productAedit.discount = req.body.discount,
+			category:productAedit.category = req.body.category,
+			description: productAedit.description = req.body.description
+		};
+		console.log(productEdit);
+		let productsEditJSON = JSON.stringify(products);
+		fs.writeFileSync(productsFilePath, productsEditJSON);
+		console.log('producto editado :D')
 		res.redirect('/')
 	},
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
+		let productId = req.params.id;
+		let productAelim = products.find(product => product.id == productId);
+		console.log('producto a eliminar...')
+		console.log(productAelim);	
 		res.redirect('/')
 	}
 };

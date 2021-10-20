@@ -73,8 +73,13 @@ const controller = {
 	destroy : (req, res) => {
 		let productId = req.params.id;
 		let productAelim = products.find(product => product.id == productId);
-		console.log('producto a eliminar...')
-		console.log(productAelim);	
+		console.log(productAelim);
+		let productIndice = products.indexOf(productAelim);
+		console.log('el producto se encuentra en el indice:', productIndice);
+		products.splice(productIndice);
+		let productsDelJSON = JSON.stringify(products);
+		fs.writeFileSync(productsFilePath, productsDelJSON);
+		console.log('producto eliminado :(')
 		res.redirect('/')
 	}
 };

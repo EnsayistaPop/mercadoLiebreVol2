@@ -33,7 +33,8 @@ const controller = {
 		price:JSON.parse(req.body.price) ,
 		discount:JSON.parse(req.body.discount),
 		category:req.body.category,
-		description:req.body.description
+		description:req.body.description,
+		image: req.file.filename
 		};
 	console.log(newProduct);
 	products.push(newProduct);
